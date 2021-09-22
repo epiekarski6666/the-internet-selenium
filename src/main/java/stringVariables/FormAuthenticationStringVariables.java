@@ -1,6 +1,6 @@
 package stringVariables;
 
-public class StringVariables {
+public class FormAuthenticationStringVariables {
     public static final String
     loginPhrase = "tomsmith",
     passwordPhrase = "SuperSecretPassword!",
