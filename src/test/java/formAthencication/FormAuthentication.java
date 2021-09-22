@@ -46,5 +46,6 @@ public class FormAuthentication extends Setup {
         WebElement logout = driver.findElement(By.className("icon-2x"));
         logout.click();
         Assertions.assertEquals(expected, driver.findElement(By.id("flash")).getText());
+
     }
 }
