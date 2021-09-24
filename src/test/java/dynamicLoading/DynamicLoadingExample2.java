@@ -5,20 +5,21 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import setup.Setup;
 import stringVariables.DynamicLoadingExample2StringVariables;
 
-public class DynamicLoadingExample2 {
-    WebDriver driver;
+public class DynamicLoadingExample2 extends Setup{
 
     @BeforeEach
-    public void driverSetup() {
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.navigate().to("https://the-internet.herokuapp.com/");
+    public void driverSetup() throws Exception {
+        Setup setupBrowser = new Setup();
+        setupBrowser.setup("chrome");
+//        setupBrowser.setup("firefox");
+//        setupBrowser.setup("edge");
+//        setupBrowser.setup("opera");
+        driver.get(BASIC_URL);
     }
     @AfterEach
     public void closeAndQuit() {

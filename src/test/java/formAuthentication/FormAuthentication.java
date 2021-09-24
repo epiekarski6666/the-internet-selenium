@@ -12,11 +12,11 @@ public class FormAuthentication extends Setup {
 
     @BeforeEach
     public void driverSetup() throws Exception {
-        Setup s = new Setup();
-        s.setup("chrome");
-//        s.setup("firefox");
-//        s.setup("edge");
-//        s.setup("opera");
+        Setup setupBrowser = new Setup();
+        setupBrowser.setup("chrome");
+//        setupBrowser.setup("firefox");
+//        setupBrowser.setup("edge");
+//        setupBrowser.setup("opera");
         driver.get(BASIC_URL);
     }
     @AfterEach
