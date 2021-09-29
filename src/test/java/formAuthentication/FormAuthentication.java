@@ -1,5 +1,6 @@
 package formAuthentication;
 
+import helperMethods.FormAuthenticationHelper;
 import locators.FormAuthenticationLocators;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -10,6 +11,8 @@ import stringVariables.FormAuthenticationStringVariables;
 
 public class FormAuthentication extends Setup {
 
+    FormAuthenticationHelper dynamicLoadingHelper1 = new FormAuthenticationHelper();
+
     @BeforeEach
     public void driverSetup() throws Exception {
         Setup setupBrowser = new Setup();
@@ -18,19 +21,16 @@ public class FormAuthentication extends Setup {
 //        setupBrowser.setup("edge");
 //        setupBrowser.setup("opera");
         driver.get(BASIC_URL);
+        driver.findElement(FormAuthenticationLocators.formAuthenticationLink).click();
     }
     @AfterEach
     public void closeAndQuit() {
-        driver.close();
         driver.quit();
     }
     @Test
     public void formAuthentication(){
-
-        driver.findElement(FormAuthenticationLocators.formAuthenticationLink).click();
-        driver.findElement(FormAuthenticationLocators.username).sendKeys(FormAuthenticationStringVariables.loginPhrase);
-        driver.findElement(FormAuthenticationLocators.password).sendKeys(FormAuthenticationStringVariables.passwordPhrase);
-        driver.findElement(FormAuthenticationLocators.password).submit();
+        dynamicLoadingHelper1.login(FormAuthenticationLocators.username, FormAuthenticationLocators.password,
+                FormAuthenticationStringVariables.usernamePhrase, FormAuthenticationStringVariables.passwordPhrase);
         driver.findElement(FormAuthenticationLocators.logout).click();
         Assertions.assertEquals(FormAuthenticationStringVariables.expected, driver.findElement(FormAuthenticationLocators.prompt).getText());
     }

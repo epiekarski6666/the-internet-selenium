@@ -1,6 +1,7 @@
 package dynamicLoading;
 
-import locators.DynamicLoadingExample2Locators;
+import helperMethods.DynamicLoadingHelper;
+import locators.DynamicLoadingLocators;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,9 +9,11 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import setup.Setup;
-import stringVariables.DynamicLoadingExample2StringVariables;
+import stringVariables.DynamicLoadingStringVariables;
 
-public class DynamicLoadingExample2 extends Setup{
+public class DynamicLoading extends Setup{
+
+    DynamicLoadingHelper helper1 = new DynamicLoadingHelper();
 
     @BeforeEach
     public void driverSetup() throws Exception {
@@ -20,19 +23,17 @@ public class DynamicLoadingExample2 extends Setup{
 //        setupBrowser.setup("edge");
 //        setupBrowser.setup("opera");
         driver.get(BASIC_URL);
+        driver.findElement(DynamicLoadingLocators.dynamicLoadingLink).click();
     }
     @AfterEach
     public void closeAndQuit() {
-        driver.close();
         driver.quit();
     }
     @Test
     public void dynamicLoadingExample2() {
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        driver.findElement(DynamicLoadingExample2Locators.dynamicLoadingLink).click();
-        driver.findElement(DynamicLoadingExample2Locators.dynamicLink2).click();
-        driver.findElement(DynamicLoadingExample2Locators.startButton).click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(DynamicLoadingExample2Locators.finishDivId));
-        Assertions.assertEquals(DynamicLoadingExample2StringVariables.expected, driver.findElement(DynamicLoadingExample2Locators.finishDivId).getText());
+        helper1.startExample2(DynamicLoadingLocators.dynamicLink2);
+        wait.until(ExpectedConditions.presenceOfElementLocated(DynamicLoadingLocators.finishDivId));
+        Assertions.assertEquals(DynamicLoadingStringVariables.expected, driver.findElement(DynamicLoadingLocators.finishDivId).getText());
     }
 }

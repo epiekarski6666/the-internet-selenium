@@ -24,7 +24,6 @@ public class JavaScriptAlerts extends Setup{
     }
     @AfterEach
     public void closeAndQuit() {
-        driver.close();
         driver.quit();
     }
     @Test

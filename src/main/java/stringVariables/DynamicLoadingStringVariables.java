@@ -1,6 +1,6 @@
 package stringVariables;
 
-public class DynamicLoadingExample2StringVariables {
+public class DynamicLoadingStringVariables {
     public static final String
     expected = "Hello World!";
 }

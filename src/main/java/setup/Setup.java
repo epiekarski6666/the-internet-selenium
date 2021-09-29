@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Parameters;
 
 import java.util.concurrent.TimeUnit;
@@ -36,5 +37,6 @@ public class Setup {
             throw new Exception("This browser is not valid for this test");
         }
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
     }
 }

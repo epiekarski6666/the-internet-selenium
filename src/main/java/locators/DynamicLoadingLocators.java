@@ -2,7 +2,7 @@ package locators;
 
 import org.openqa.selenium.By;
 
-public class DynamicLoadingExample2Locators {
+public class DynamicLoadingLocators {
     public static final By
     dynamicLoadingLink = By.xpath("//a[@href='/dynamic_loading']"),
     dynamicLink2 = By.xpath("//a[@href='/dynamic_loading/2']"),
