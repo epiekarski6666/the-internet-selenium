@@ -12,5 +12,8 @@ public class FormAuthenticationHelper extends Setup {
         driver.findElement(password).sendKeys(passwordPhrase);
         driver.findElement(password).submit();
     }
+    public void logout(By logout){
+        driver.findElement(logout).click();
+    }
 
 }

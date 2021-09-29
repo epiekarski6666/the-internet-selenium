@@ -13,15 +13,17 @@ import stringVariables.DynamicLoadingStringVariables;
 
 public class DynamicLoading extends Setup{
 
-    DynamicLoadingHelper helper1 = new DynamicLoadingHelper();
+    DynamicLoadingHelper dlHelper = new DynamicLoadingHelper();
 
     @BeforeEach
     public void driverSetup() throws Exception {
         Setup setupBrowser = new Setup();
-        setupBrowser.setup("chrome");
-//        setupBrowser.setup("firefox");
-//        setupBrowser.setup("edge");
-//        setupBrowser.setup("opera");
+        setupBrowser.setup(
+                "chrome"
+//                "firefox"
+//                "edge"
+//                "opera"
+        );
         driver.get(BASIC_URL);
         driver.findElement(DynamicLoadingLocators.dynamicLoadingLink).click();
     }
@@ -32,7 +34,7 @@ public class DynamicLoading extends Setup{
     @Test
     public void dynamicLoadingExample2() {
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        helper1.startExample2(DynamicLoadingLocators.dynamicLink2);
+        dlHelper.startExample2(DynamicLoadingLocators.dynamicLink2);
         wait.until(ExpectedConditions.presenceOfElementLocated(DynamicLoadingLocators.finishDivId));
         Assertions.assertEquals(DynamicLoadingStringVariables.expected, driver.findElement(DynamicLoadingLocators.finishDivId).getText());
     }

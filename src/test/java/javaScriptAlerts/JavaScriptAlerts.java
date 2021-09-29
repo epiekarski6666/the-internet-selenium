@@ -1,5 +1,6 @@
 package javaScriptAlerts;
 
+import helperMethods.JavaScriptAlertsHelper;
 import locators.JavaScriptAlertsLocators;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -13,14 +14,20 @@ import stringVariables.JavaScriptAlertsStringVariables;
 
 public class JavaScriptAlerts extends Setup{
 
+    JavaScriptAlertsHelper jaHelper = new JavaScriptAlertsHelper();
+
     @BeforeEach
     public void driverSetup() throws Exception{
         Setup setupBrowser = new Setup();
-        setupBrowser.setup("chrome");
-//        setupBrowser.setup("firefox");
-//        setupBrowser.setup("edge");
-//        setupBrowser.setup("opera");
+        setupBrowser.setup(
+                "chrome"
+//                "firefox"
+//                "edge"
+//                "opera"
+        );
         driver.get(BASIC_URL);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(JavaScriptAlertsLocators.javaScriptAlertsLink));
+        driver.findElement(JavaScriptAlertsLocators.javaScriptAlertsLink).click();
     }
     @AfterEach
     public void closeAndQuit() {
@@ -29,51 +36,41 @@ public class JavaScriptAlerts extends Setup{
     @Test
     public void clickForJSConfirm() {
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(JavaScriptAlertsLocators.javaScriptAlertsLink));
-        driver.findElement(JavaScriptAlertsLocators.javaScriptAlertsLink).click();
-        driver.findElement(JavaScriptAlertsLocators.clickForJsConfirmButton).click();
+        jaHelper.javaScript(JavaScriptAlertsLocators.clickForJsConfirmButton);
         wait.until(ExpectedConditions.alertIsPresent());
-        driver.switchTo().alert().accept();
+        jaHelper.alertAccept();
         Assertions.assertEquals(JavaScriptAlertsStringVariables.expected, driver.findElement(JavaScriptAlertsLocators.finishMessageId).getText());
     }
     @Test
     public void javaScriptAlertJsAlertPromptText() {
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(JavaScriptAlertsLocators.javaScriptAlertsLink));
-        driver.findElement(JavaScriptAlertsLocators.javaScriptAlertsLink).click();
-        driver.findElement(JavaScriptAlertsLocators.clickForJsAlertButton).click();
+        jaHelper.javaScript(JavaScriptAlertsLocators.clickForJsAlertButton);
         wait.until(ExpectedConditions.alertIsPresent());
         Assertions.assertEquals(JavaScriptAlertsStringVariables.iAmJsAlert, driver.switchTo().alert().getText());
-        driver.switchTo().alert().accept();
+        jaHelper.alertAccept();
     }
     @Test
     public void javaScriptAlertJsConfirmPromptText() {
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(JavaScriptAlertsLocators.javaScriptAlertsLink));
-        driver.findElement(JavaScriptAlertsLocators.javaScriptAlertsLink).click();
-        driver.findElement(JavaScriptAlertsLocators.clickForJsConfirmButton).click();
+        jaHelper.javaScript(JavaScriptAlertsLocators.clickForJsConfirmButton);
         wait.until(ExpectedConditions.alertIsPresent());
         Assertions.assertEquals(JavaScriptAlertsStringVariables.iAmJsConfirm, driver.switchTo().alert().getText());
-        driver.switchTo().alert().accept();
+        jaHelper.alertAccept();
     }    @Test
     public void javaScriptAlert3() {
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(JavaScriptAlertsLocators.javaScriptAlertsLink));
-        driver.findElement(JavaScriptAlertsLocators.javaScriptAlertsLink).click();
-        driver.findElement(JavaScriptAlertsLocators.clickForJsPromptButton).click();
+        jaHelper.javaScript(JavaScriptAlertsLocators.clickForJsPromptButton);
         wait.until(ExpectedConditions.alertIsPresent());
         Assertions.assertEquals(JavaScriptAlertsStringVariables.iAmJsPrompt, driver.switchTo().alert().getText());
-        driver.switchTo().alert().accept();
+        jaHelper.alertAccept();
     }
     @Test
     public void javaScriptAlert4() {
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(JavaScriptAlertsLocators.javaScriptAlertsLink));
-        driver.findElement(JavaScriptAlertsLocators.javaScriptAlertsLink).click();
-        driver.findElement(JavaScriptAlertsLocators.clickForJsPromptButton).click();
+        jaHelper.javaScript(JavaScriptAlertsLocators.clickForJsPromptButton);
         wait.until(ExpectedConditions.alertIsPresent());
         driver.switchTo().alert().sendKeys(JavaScriptAlertsStringVariables.hireMePlease);
-        driver.switchTo().alert().accept();
+        jaHelper.alertAccept();
         Assertions.assertEquals(JavaScriptAlertsStringVariables.jsPromptEnteredText, driver.findElement(JavaScriptAlertsLocators.finishMessageId).getText());
     }
 }

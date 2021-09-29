@@ -11,15 +11,17 @@ import stringVariables.FormAuthenticationStringVariables;
 
 public class FormAuthentication extends Setup {
 
-    FormAuthenticationHelper dynamicLoadingHelper1 = new FormAuthenticationHelper();
+    FormAuthenticationHelper faHelper = new FormAuthenticationHelper();
 
     @BeforeEach
     public void driverSetup() throws Exception {
         Setup setupBrowser = new Setup();
-        setupBrowser.setup("chrome");
-//        setupBrowser.setup("firefox");
-//        setupBrowser.setup("edge");
-//        setupBrowser.setup("opera");
+        setupBrowser.setup(
+                "chrome"
+//                "firefox"
+//                "edge"
+//                "opera"
+        );
         driver.get(BASIC_URL);
         driver.findElement(FormAuthenticationLocators.formAuthenticationLink).click();
     }
@@ -29,9 +31,10 @@ public class FormAuthentication extends Setup {
     }
     @Test
     public void formAuthentication(){
-        dynamicLoadingHelper1.login(FormAuthenticationLocators.username, FormAuthenticationLocators.password,
+        faHelper.login(FormAuthenticationLocators.username, FormAuthenticationLocators.password,
                 FormAuthenticationStringVariables.usernamePhrase, FormAuthenticationStringVariables.passwordPhrase);
-        driver.findElement(FormAuthenticationLocators.logout).click();
+//        driver.findElement(FormAuthenticationLocators.logout).click();
+        faHelper.logout(FormAuthenticationLocators.logout);
         Assertions.assertEquals(FormAuthenticationStringVariables.expected, driver.findElement(FormAuthenticationLocators.prompt).getText());
     }
 }
