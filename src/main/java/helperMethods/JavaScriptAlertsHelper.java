@@ -5,7 +5,7 @@ import setup.Setup;
 
 public class JavaScriptAlertsHelper extends Setup {
 
-    public void javaScript(By button){
+    public void buttonClick(By button){
         driver.findElement(button).click();
     }
     public void alertAccept(){

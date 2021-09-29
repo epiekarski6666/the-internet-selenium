@@ -13,7 +13,7 @@ import stringVariables.DynamicLoadingStringVariables;
 
 public class DynamicLoading extends Setup{
 
-    DynamicLoadingHelper dlHelper = new DynamicLoadingHelper();
+    DynamicLoadingHelper dynamicLoadingHelper = new DynamicLoadingHelper();
 
     @BeforeEach
     public void driverSetup() throws Exception {
@@ -32,9 +32,9 @@ public class DynamicLoading extends Setup{
         driver.quit();
     }
     @Test
-    public void dynamicLoadingExample2() {
+    public void dynamicLoadingExample2ConfirmMessage() {
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        dlHelper.startExample2(DynamicLoadingLocators.dynamicLink2);
+        dynamicLoadingHelper.startExample2(DynamicLoadingLocators.dynamicLink2);
         wait.until(ExpectedConditions.presenceOfElementLocated(DynamicLoadingLocators.finishDivId));
         Assertions.assertEquals(DynamicLoadingStringVariables.expected, driver.findElement(DynamicLoadingLocators.finishDivId).getText());
     }

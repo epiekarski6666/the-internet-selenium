@@ -1,9 +1,7 @@
 package helperMethods;
 
-import locators.FormAuthenticationLocators;
 import org.openqa.selenium.By;
 import setup.Setup;
-import stringVariables.FormAuthenticationStringVariables;
 
 public class FormAuthenticationHelper extends Setup {
 

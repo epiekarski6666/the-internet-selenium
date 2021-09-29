@@ -11,7 +11,7 @@ import stringVariables.FormAuthenticationStringVariables;
 
 public class FormAuthentication extends Setup {
 
-    FormAuthenticationHelper faHelper = new FormAuthenticationHelper();
+    FormAuthenticationHelper formAuthenticationHelper = new FormAuthenticationHelper();
 
     @BeforeEach
     public void driverSetup() throws Exception {
@@ -30,11 +30,10 @@ public class FormAuthentication extends Setup {
         driver.quit();
     }
     @Test
-    public void formAuthentication(){
-        faHelper.login(FormAuthenticationLocators.username, FormAuthenticationLocators.password,
+    public void formAuthenticationConfirmMessage(){
+        formAuthenticationHelper.login(FormAuthenticationLocators.username, FormAuthenticationLocators.password,
                 FormAuthenticationStringVariables.usernamePhrase, FormAuthenticationStringVariables.passwordPhrase);
-//        driver.findElement(FormAuthenticationLocators.logout).click();
-        faHelper.logout(FormAuthenticationLocators.logout);
+        formAuthenticationHelper.logout(FormAuthenticationLocators.logout);
         Assertions.assertEquals(FormAuthenticationStringVariables.expected, driver.findElement(FormAuthenticationLocators.prompt).getText());
     }
 }
