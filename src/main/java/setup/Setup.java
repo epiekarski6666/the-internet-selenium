@@ -13,7 +13,7 @@ public class Setup {
     public static WebDriver driver;
     public String BASIC_URL = "https://the-internet.herokuapp.com/";
 
-    @Parameters("browserType")
+    //@Parameters("browserType")
     public void setup(String browserType) throws Exception{
 
         if (browserType.equalsIgnoreCase("chrome")) {
